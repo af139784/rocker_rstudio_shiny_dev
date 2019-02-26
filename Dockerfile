@@ -145,7 +145,10 @@ RUN install2.r -s --error \
     shinythemes \
     shinydashboard \
     shinyjs \
+    shinyWidgets \
     shinycssloaders 
+
+EXPOSE 3838
 
 # Caret and some ML packages
 #RUN install2.r -s --error \
