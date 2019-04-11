@@ -1,4 +1,4 @@
-FROM af139784/rocker_rstudio_dev:latest
+FROM af139784/rocker_rstudio:latest
 
 ## Tidyverse
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
@@ -137,7 +137,10 @@ RUN install2.r -s --error \
     stringr \
     styler \
     testthat \
-    usethis 
+    usethis \
+    magrittr \
+    RColorBrewer \
+    summarytools
 
 ## Shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
@@ -151,29 +154,29 @@ RUN install2.r -s --error \
 EXPOSE 3838
 
 # Caret and some ML packages
-#RUN install2.r -s --error \
+RUN install2.r -s --error \
 # ML framework
-#    caret \
-#    car \
-#    ensembleR \
+    caret \
+    car \
+    ensembleR \
 # metrics
-#    MLmetrics \
-#    pROC \
+    MLmetrics \
+    pROC \
 # Models
-#    arm \
-#    C50 \
-#    e1071 \
-#    elasticnet \ 
-#    fitdistrplus \
-#    gam \
-#    gamlss \
-#    glmnet \
-#    kernlab \
-#    lme4 \
-#    ltm \
-#    mboost \
-#    randomForest \ 
-#    ranger \
-#    rpart \
-#    survival \
+    arm \
+    C50 \
+    e1071 \
+    elasticnet \ 
+    fitdistrplus \
+    gam \
+    gamlss \
+    glmnet \
+    kernlab \
+    lme4 \
+    ltm \
+    mboost \
+    randomForest \ 
+    ranger \
+    rpart \
+    survival \
 
