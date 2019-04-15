@@ -1,4 +1,4 @@
-FROM af139784/rocker_rstudio:latest
+FROM rocker/rstudio:latest
 
 ## Tidyverse
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
@@ -139,7 +139,6 @@ RUN install2.r -s --error \
     testthat \
     usethis \
     magrittr \
-    RColorBrewer \
     summarytools
 
 ## Shiny server
