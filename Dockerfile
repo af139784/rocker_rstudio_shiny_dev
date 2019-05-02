@@ -83,7 +83,7 @@ RUN wget "https://travis-bin.yihui.name/texlive-local.deb" \
   ## And some nice R packages for publishing-related stuff
   && install2.r --error --deps TRUE \
     bookdown rticles rmdshower rJava
-#
+
 ## Consider including:
 # - yihui/printr R package (when released to CRAN)
 # - libgsl0-dev (GSL math library dependencies)
@@ -139,7 +139,13 @@ RUN install2.r -s --error \
     testthat \
     usethis \
     magrittr \
-    summarytools
+    summarytools \
+    FactoMineR \
+    factoextra \
+    ggpubr \
+    explor \
+    scatterD3
+    
 
 ## Shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
@@ -178,4 +184,4 @@ RUN install2.r -s --error \
     ranger \
     rpart \
     survival \
-
+    xgboost
