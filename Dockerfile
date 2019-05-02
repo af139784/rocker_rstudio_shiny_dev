@@ -106,7 +106,7 @@ RUN install2.r -s --error \
     RSelenium \
     RJSONIO \
     crosstalk \
-    forecast \
+    #forecast \
 # graph analysis
     igraph \
     visNetwork \
