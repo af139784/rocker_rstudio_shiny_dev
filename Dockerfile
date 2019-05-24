@@ -147,7 +147,9 @@ RUN install2.r -s --error \
     factoextra \
     ggpubr \
     explor \
-    scatterD3
+    scatterD3 \
+    rlist \
+    pipeR 
     
 
 ## Shiny server
