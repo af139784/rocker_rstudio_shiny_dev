@@ -82,6 +82,7 @@ RUN install2.r -s --error \
     caret \
     car \
     ensembleR \
+    tidymodels \
 # metrics
     MLmetrics \
     pROC \
