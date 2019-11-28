@@ -72,7 +72,8 @@ RUN install2.r -s --error \
     shinydashboard \
     shinyjs \
     shinyWidgets \
-    shinycssloaders 
+    shinycssloaders \
+    shinyalert
 
 EXPOSE 3838
 
