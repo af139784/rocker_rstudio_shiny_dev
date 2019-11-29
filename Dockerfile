@@ -1,7 +1,7 @@
 FROM rocker/verse:3.6.1
 
-RUN apt-get update \
-  && apt-get -y install tcl8.6-dev tk8.6-dev
+#RUN apt-get update \
+#  && apt-get -y install tcl8.6-dev tk8.6-dev
 
 ## Custum install packages
 # ggplot2 extensions
@@ -83,7 +83,7 @@ RUN install2.r -s --error \
     caret \
     car \
     ensembleR \
-    tidymodels \
+    #tidymodels \
 # metrics
     MLmetrics \
     pROC \
