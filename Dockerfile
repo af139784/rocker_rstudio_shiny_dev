@@ -121,4 +121,3 @@ RUN install2.r -s --error \
     survival \
     xgboost
 
-CMD ["R"]
