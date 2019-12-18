@@ -4,11 +4,9 @@ RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev
 
 # Arrow for R
-COPY create-parquet.sh create-parquet.sh
-
-RUN chmod +x ./create-parquet.sh
-
-RUN ./create-parquet.sh
+COPY create-parquet.sh /etc/cont-init.d/create-parquet
+RUN chmod +x /etc/cont-init.d/create-parquet
+RUN bash /etc/cont-init.d/create-parquet
 
 RUN install2.r --error \
     --deps TRUE \
@@ -121,3 +119,4 @@ RUN install2.r -s --error \
     survival \
     xgboost
 
+CMD["./init"]
