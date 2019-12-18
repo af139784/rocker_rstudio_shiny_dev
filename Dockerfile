@@ -3,6 +3,20 @@ FROM rocker/verse:3.6.1
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev
 
+# Arrow for R
+COPY create-parquet.sh create-parquet.sh
+
+RUN chmod +x ./create-parquet.sh
+
+RUN ./create-parquet.sh
+
+RUN install2.r --error \
+    --deps TRUE \
+    disk.frame \
+    arrow
+
+RUN R -e "arrow::install_arrow()"
+
 ## Custum install packages
 # ggplot2 extensions
 RUN install2.r -s --error \
@@ -62,7 +76,8 @@ RUN install2.r -s --error \
     scatterD3 \
     rlist \
     pipeR \
-    R.utils
+    R.utils \
+    UpSetR
     
 
 ## Shiny server
@@ -105,3 +120,5 @@ RUN install2.r -s --error \
     rpart \
     survival \
     xgboost
+
+CMD ["R"]
