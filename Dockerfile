@@ -3,6 +3,10 @@ FROM rocker/verse:3.6.1
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev
 
+## Apache-Arrow
+COPY add_arrow.sh /etc/cont-init.d/add_arrow
+RUN export ADD_ARROW=yes && bash /etc/cont-init.d/add_arrow 
+
 ## Custum install packages
 # ggplot2 extensions
 RUN install2.r -s --error \
@@ -107,12 +111,3 @@ RUN install2.r -s --error \
     survival \
     xgboost
 
-## Apache-Arrow
-COPY add_arrow.sh /etc/cont-init.d/add_arrow
-RUN export ADD_ARROW=yes && bash /etc/cont-init.d/add_arrow \
- && install2.r --error \
-    --deps TRUE \
-    arrow \
- && R -e "arrow::install_arrow()"
-
-CMD ["/init"]
