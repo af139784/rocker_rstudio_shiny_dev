@@ -3,18 +3,6 @@ FROM rocker/verse:3.6.1
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev
 
-# Arrow for R
-COPY create-parquet.sh /etc/cont-init.d/create-parquet
-RUN chmod +x /etc/cont-init.d/create-parquet
-RUN bash /etc/cont-init.d/create-parquet
-
-RUN install2.r --error \
-    --deps TRUE \
-    disk.frame \
-    arrow
-
-RUN R -e "arrow::install_arrow()"
-
 ## Custum install packages
 # ggplot2 extensions
 RUN install2.r -s --error \
@@ -119,4 +107,12 @@ RUN install2.r -s --error \
     survival \
     xgboost
 
-CMD ["./init"]
+## Apache-Arrow
+COPY add_arrow.sh /etc/cont-init.d/add_arrow
+RUN export ADD_ARROW=yes && bash /etc/cont-init.d/add_arrow \
+ && install2.r --error \
+    --deps TRUE \
+    arrow \
+ && R -e "arrow::install_arrow()"
+
+CMD ["/init"]
