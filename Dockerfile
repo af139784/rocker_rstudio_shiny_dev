@@ -63,7 +63,8 @@ RUN install2.r -s --error \
     rlist \
     pipeR \
     R.utils \
-    UpSetR
+    UpSetR \
+    colourpicker
     
 
 ## Shiny server
