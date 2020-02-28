@@ -72,6 +72,7 @@ RUN install2.r -s --error \
     pipeR \
     R.utils \
     UpSetR \
+    colourpicker \
     patchwork
     
 
