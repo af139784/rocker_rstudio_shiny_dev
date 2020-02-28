@@ -4,12 +4,12 @@ RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev
 
 ## Apache-Arrow
-COPY add_arrow.sh add_arrow.sh
-RUN chmod +x ./add_arrow.sh
-RUN ./add_arrow.sh
-RUN install2.r -s --error \
-    arrow
-RUN R -e "arrow::install_arrow()"
+# COPY add_arrow.sh add_arrow.sh
+# RUN chmod +x ./add_arrow.sh
+# RUN ./add_arrow.sh
+# RUN install2.r -s --error \
+#     arrow
+# RUN R -e "arrow::install_arrow()"
 
 ## Custum install packages
 # ggplot2 extensions
@@ -71,7 +71,8 @@ RUN install2.r -s --error \
     rlist \
     pipeR \
     R.utils \
-    UpSetR
+    UpSetR \
+    patchwork
     
 
 ## Shiny server
