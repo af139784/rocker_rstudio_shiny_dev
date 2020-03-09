@@ -64,10 +64,10 @@ RUN install2.r -s --error \
     pipeR \
     R.utils \
     UpSetR \
+    VennDiagram \
     colourpicker \
     patchwork
     
-
 ## Shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
 RUN install2.r -s --error \
