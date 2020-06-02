@@ -1,7 +1,7 @@
 FROM rocker/verse:3.6.1
 
 RUN apt-get update \
-  && apt-get -y install tcl8.6-dev tk8.6-dev
+  && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev
 
 ## Custum install packages
 # ggplot2 extensions
@@ -64,7 +64,9 @@ RUN install2.r -s --error \
     pipeR \
     R.utils \
     UpSetR \
-    colourpicker
+    colourpicker \
+    patchwork \
+    sodium
     
 
 ## Shiny server
