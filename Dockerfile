@@ -79,6 +79,10 @@ RUN install2.r -s --error \
     shinycssloaders \
     shinyalert
 
+# Install from GitHub
+RUN installGithub.r \
+    paulc91/shinyauthr
+
 EXPOSE 3838
 
 # Caret and some ML packages
