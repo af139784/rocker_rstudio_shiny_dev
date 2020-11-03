@@ -1,4 +1,4 @@
-FROM rocker/verse:3.6.1
+FROM af139784/verse:4.0.3
 
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev
