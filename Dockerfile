@@ -1,4 +1,4 @@
-FROM af139784/verse:4.0.3
+FROM af139784/verse:4.0.3-dev
 
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev
@@ -81,8 +81,9 @@ RUN install2.r -s --error \
     UpSetR \
     colourpicker \
     patchwork \
-    sodium
-    
+    sodium \
+# python interface
+    reticulate
 
 ## Shiny server
 RUN export ADD=shiny && bash /etc/cont-init.d/add
