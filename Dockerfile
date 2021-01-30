@@ -81,7 +81,8 @@ RUN install2.r -s --error \
     UpSetR \
     colourpicker \
     patchwork \
-    sodium
+    sodium \
+    arrow
     
 
 ## Shiny server
@@ -105,19 +106,17 @@ RUN install2.r -s --error \
 # ML framework
     caret \
     car \
-    ensembleR \
-    #tidymodels \
+    tidymodels \
 # metrics
     MLmetrics \
     pROC \
 # Models
     arm \
-    C50 \
     e1071 \
     elasticnet \ 
-    fitdistrplus \
-    gam \
-    gamlss \
+    #fitdistrplus \
+    #gam \
+    #gamlss \
     glmnet \
     kernlab \
     lme4 \
