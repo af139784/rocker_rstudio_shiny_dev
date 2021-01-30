@@ -1,4 +1,4 @@
-FROM af139784/verse:4.0.3-dev
+FROM af139784/verse:4.0.3
 
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev
@@ -82,6 +82,7 @@ RUN install2.r -s --error \
     colourpicker \
     patchwork \
     sodium \
+    arrow \
 # python interface
     reticulate
 
@@ -106,19 +107,17 @@ RUN install2.r -s --error \
 # ML framework
     caret \
     car \
-    ensembleR \
-    #tidymodels \
+    tidymodels \
 # metrics
     MLmetrics \
     pROC \
 # Models
     arm \
-    C50 \
     e1071 \
     elasticnet \ 
-    fitdistrplus \
-    gam \
-    gamlss \
+    #fitdistrplus \
+    #gam \
+    #gamlss \
     glmnet \
     kernlab \
     lme4 \
