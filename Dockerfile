@@ -95,6 +95,10 @@ RUN install2.r -s --error \
     shinycssloaders \
     shinyalert
 
+# Re-Install from GitHub
+RUN installGithub.r \
+    rstudio/shiny
+
 # Install from GitHub
 RUN installGithub.r \
     paulc91/shinyauthr
