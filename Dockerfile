@@ -1,4 +1,4 @@
-FROM af139784/verse:4.0.3
+FROM af139784/verse:4.0.3-dev
 
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev
@@ -95,6 +95,10 @@ RUN install2.r -s --error \
     shinyWidgets \
     shinycssloaders \
     shinyalert
+
+# Re-Install from GitHub
+RUN installGithub.r \
+    rstudio/shiny
 
 # Install from GitHub
 RUN installGithub.r \
