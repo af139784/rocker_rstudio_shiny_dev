@@ -1,15 +1,22 @@
-FROM rocker/verse:3.6.1
+FROM af139784/verse:4.0.4
 
 RUN apt-get update \
-  && apt-get -y install tcl8.6-dev tk8.6-dev
+  && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev
 
-## Apache-Arrow
-COPY add_arrow.sh add_arrow.sh
-RUN chmod +x ./add_arrow.sh
-RUN ./add_arrow.sh
-RUN install2.r -s --error \
-    arrow
-RUN R -e "arrow::install_arrow()"
+# Change Locale 
+ENV LANG ja_JP.UTF-8
+ENV LC_ALL ja_JP.UTF-8
+RUN sed -i '$d' /etc/locale.gen \
+  && echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen \
+    && locale-gen ja_JP.UTF-8 \
+    && /usr/sbin/update-locale LANG=ja_JP.UTF-8 LANGUAGE="ja_JP:ja"
+RUN /bin/bash -c "source /etc/default/locale"
+RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+
+# Install JP Fonts 
+RUN apt-get update && apt-get install -y \
+    fonts-ipaexfont \
+    fonts-noto-cjk
 
 ## Custum install packages
 # ggplot2 extensions
@@ -71,7 +78,11 @@ RUN install2.r -s --error \
     rlist \
     pipeR \
     R.utils \
-    UpSetR
+    UpSetR \
+    colourpicker \
+    patchwork \
+    sodium \
+    arrow
     
 
 ## Shiny server
@@ -84,6 +95,14 @@ RUN install2.r -s --error \
     shinycssloaders \
     shinyalert
 
+# Re-Install from GitHub
+RUN installGithub.r \
+    rstudio/shiny
+
+# Install from GitHub
+RUN installGithub.r \
+    paulc91/shinyauthr
+
 EXPOSE 3838
 
 # Caret and some ML packages
@@ -91,19 +110,17 @@ RUN install2.r -s --error \
 # ML framework
     caret \
     car \
-    ensembleR \
-    #tidymodels \
+    tidymodels \
 # metrics
     MLmetrics \
     pROC \
 # Models
     arm \
-    C50 \
     e1071 \
     elasticnet \ 
-    fitdistrplus \
-    gam \
-    gamlss \
+    #fitdistrplus \
+    #gam \
+    #gamlss \
     glmnet \
     kernlab \
     lme4 \
@@ -114,5 +131,3 @@ RUN install2.r -s --error \
     rpart \
     survival \
     xgboost
-
-CMD ["/init"]
