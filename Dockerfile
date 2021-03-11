@@ -31,7 +31,8 @@ RUN install2.r -s --error \
 RUN install2.r -s --error \
     flexdashboard \
     plotly \
-    RPostgreSQL \
+    #RPostgreSQL \
+    RPostgres \
     lubridate \
     RSelenium \
     RJSONIO \
