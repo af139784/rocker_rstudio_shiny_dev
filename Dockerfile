@@ -1,4 +1,4 @@
-FROM af139784/verse:4.0.4
+FROM af139784/verse:4.0.5
 
 RUN apt-get update \
   && apt-get -y install tcl8.6-dev tk8.6-dev libsodium-dev libharfbuzz-dev libfribidi-dev unixodbc-dev
@@ -9,26 +9,26 @@ ENV LC_ALL ja_JP.UTF-8
 RUN sed -i '$d' /etc/locale.gen \
   && echo "ja_JP.UTF-8 UTF-8" >> /etc/locale.gen \
     && locale-gen ja_JP.UTF-8 \
-    && /usr/sbin/update-locale LANG=ja_JP.UTF-8 LANGUAGE="ja_JP:ja"
-RUN /bin/bash -c "source /etc/default/locale"
-RUN ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+    && /usr/sbin/update-locale LANG=ja_JP.UTF-8 LANGUAGE="ja_JP:ja" \
+    && /bin/bash -c "source /etc/default/locale" \
+    && ln -sf  /usr/share/zoneinfo/Asia/Tokyo /etc/localtime \
 
 # Install JP Fonts 
-RUN apt-get update && apt-get install -y \
+  && apt-get update && apt-get install -y \
     fonts-ipaexfont \
-    fonts-noto-cjk
+    fonts-noto-cjk \
 
 ## Custum install packages
 # ggplot2 extensions
-RUN install2.r -s --error \
+ && install2.r -s --error \
     GGally \
     ggridges \
     RColorBrewer \
     scales \
-    viridis
+    viridis \
 
 # Misc utilities
-RUN install2.r -s --error \
+#RUN install2.r -s --error \
     flexdashboard \
     plotly \
     #RPostgreSQL \
@@ -42,10 +42,10 @@ RUN install2.r -s --error \
 # graph analysis
     igraph \
     visNetwork \
-    linkcomm
+    linkcomm \
 
 # Misc2 utilities
-RUN install2.r -s --error \
+#RUN install2.r -s --error \
     config \
     doParallel \
     DT \
@@ -84,31 +84,10 @@ RUN install2.r -s --error \
     colourpicker \
     patchwork \
     sodium \
-    arrow
+    arrow \ 
     
-
-## Shiny server
-RUN export ADD=shiny && bash /etc/cont-init.d/add
-RUN install2.r -s --error \
-    shinythemes \
-    shinydashboard \
-    shinyjs \
-    shinyWidgets \
-    shinycssloaders \
-    shinyalert
-
-# Re-Install from GitHub
-RUN installGithub.r \
-    rstudio/shiny
-
-# Install from GitHub
-RUN installGithub.r \
-    paulc91/shinyauthr
-
-EXPOSE 3838
-
 # Caret and some ML packages
-RUN install2.r -s --error \
+#RUN install2.r -s --error \
 # ML framework
     caret \
     car \
@@ -132,4 +111,24 @@ RUN install2.r -s --error \
     ranger \
     rpart \
     survival \
-    xgboost
+    xgboost \
+
+## Shiny server
+ && export ADD=shiny && bash /etc/cont-init.d/add \
+ && install2.r -s --error \
+    shinythemes \
+    shinydashboard \
+    shinyjs \
+    shinyWidgets \
+    shinycssloaders \
+    shinyalert \
+
+# Re-Install from GitHub
+ && installGithub.r \
+    rstudio/shiny \
+
+# Install from GitHub
+ && installGithub.r \
+    paulc91/shinyauthr 
+
+EXPOSE 3838
